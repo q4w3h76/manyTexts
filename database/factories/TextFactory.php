@@ -22,6 +22,7 @@ class TextFactory extends Factory
         }
         $tags = json_encode($tags);
         return [
+            'title' => fake()->words(3, true),
             'text' => fake()->text(),
             'tags' => $tags,
             'is_public' => fake()->boolean(),
