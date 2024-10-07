@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('title')->default('Untitled');
             $table->text('text');
-            $table->json('tags')->nullable();
-            $table->foreignId('user_id')->constrained();
+            $table->json('tags')->nullable()->default(null);
+            $table->foreignId('user_id')->nullable()->default(null)->constrained()->nullOnDelete();
             $table->boolean('is_public')->default(false);
-            $table->timestamp('expiration');
+            $table->timestamp('expiration')->nullable()->default(null);
             $table->timestamps();
         });
     }
