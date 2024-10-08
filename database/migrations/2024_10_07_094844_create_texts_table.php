@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('texts', function (Blueprint $table) {
             $table->id();
             $table->string('title')->default('Untitled');
+            $table->string('slug', 10)->unique();
             $table->text('text');
             $table->json('tags')->nullable()->default(null);
             $table->foreignId('user_id')->nullable()->default(null)->constrained()->nullOnDelete();
