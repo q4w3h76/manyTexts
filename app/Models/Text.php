@@ -38,6 +38,11 @@ class Text extends Model
         });
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     private static function generateUniqueSlug(int $length = 10)
     {
         do {
