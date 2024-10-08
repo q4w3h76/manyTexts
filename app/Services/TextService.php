@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Text;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class TextService
@@ -33,8 +34,12 @@ class TextService
         if(isset($data['tags'])) {
             $data['tags'] = json_encode($data['tags']);
         }
-        $data['expiration'] = null;
 
+        $data['expiration'] = 
+            $data['expiration'] != 0 ? 
+                now()->addMinutes($data['expiration']) :
+                null;
+        
         $text = Text::create($data);
         return $text;
     }
@@ -45,12 +50,23 @@ class TextService
         if(isset($data['tags'])) {
             $data['tags'] = json_encode($data['tags']);
         }
-        $data['expiration'] = null;
-        $text = Text::create($data);
+        if(isset($data['expiration'])) {
+            $data['expiration'] = $this->getNowAddMinutes($data['expiration']);
+        }
+            
+
+        $text->update($data);
     }
 
     public function deleteText(Text $text)
     {
         $text->delete();
+    }
+
+    private function getNowAddMinutes(int $expiration): Carbon|null
+    {
+        return $expiration != 0 ? 
+            now()->addMinutes($expiration) :
+            null;
     }
 }
