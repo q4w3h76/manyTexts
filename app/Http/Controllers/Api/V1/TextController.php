@@ -15,7 +15,6 @@ class TextController extends Controller
     public function __construct(TextService $textService)
     {
         $this->textService = $textService;
-        $this->authorizeResource(Text::class, 'text');
     }
     
     public function index()
