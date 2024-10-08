@@ -15,29 +15,16 @@ class TextService
         return new Collection($texts);
     }
 
-    public function getText($slug): Text|null
+    public function checkExpirationText(Text $text)
     {
-        $text = Text::whereSlug($slug)->first();
-        if ($text != null) {
-            // if text not public
-            if (!$text->is_public) {
-                if (Auth::check()) {
-                    // if the text does not belong to the current user
-                    if($text->user_id != Auth::user()->id) {
-                        throw new AuthorizationException('You do not have access to this text');
-                    }
-                } else {
-                    throw new AuthorizationException('You do not have access to this text');
-                }
-            // if the text should be deleted after viewing
-            } elseif($text->expiration === null) {
-                $text->delete();
-            }
+        // if the text should be deleted after viewing
+        if($text->expiration === null) {
+            $text->delete();
         }
         return $text;
     }
 
-    public function store($data): Text
+    public function storeText($data): Text
     {
         if (Auth::check()) {
             $data['user_id'] = Auth::user()->id;
@@ -52,40 +39,18 @@ class TextService
         return $text;
     }
 
-    public function update($data, $slug): Text|null
+    public function updateText($data, Text $text)
     {
-        $text = Text::whereSlug($slug)->first();
-        if ($text != null) {
-            if (Auth::check() && 
-                $text->user_id === Auth::user()->id
-            ) {
-                // array to json
-                if(isset($data['tags'])) {
-                    $data['tags'] = json_encode($data['tags']);
-                }
-                $data['expiration'] = null;
-
-                $text = Text::create($data);
-            } else {
-                throw new AuthorizationException('You do not have access to this text');
-            }
+        // array to json
+        if(isset($data['tags'])) {
+            $data['tags'] = json_encode($data['tags']);
         }
-        
-        return $text;
+        $data['expiration'] = null;
+        $text = Text::create($data);
     }
 
-    public function delete($slug): Text|null
+    public function deleteText(Text $text)
     {
-        $text = Text::whereSlug($slug)->first();
-        if ($text != null) {
-            if (Auth::check() && 
-                $text->user_id === Auth::user()->id
-            ) {
-                $text->delete();
-            } else {
-                throw new AuthorizationException('You do not have access to this text');
-            }
-        }
-        return $text;
+        $text->delete();
     }
 }

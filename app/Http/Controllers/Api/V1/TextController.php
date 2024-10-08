@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Text\StoreRequest;
 use App\Http\Requests\Text\UpdateRequest;
+use App\Models\Text;
 use App\Services\TextService;
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class TextController extends Controller
 {
@@ -17,6 +15,7 @@ class TextController extends Controller
     public function __construct(TextService $textService)
     {
         $this->textService = $textService;
+        $this->authorizeResource(Text::class, 'text');
     }
     
     public function index()
@@ -31,7 +30,7 @@ class TextController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        $text = $this->textService->store($data);
+        $text = $this->textService->storeText($data);
 
         return response()->json([
             'status' => 'ok',
@@ -40,13 +39,9 @@ class TextController extends Controller
     }
 
     
-    public function show($slug)
+    public function show(Text $text)
     {
-        $text = $this->textService->getText($slug);
-
-        if ($text === null) {
-            throw new NotFoundHttpException('Text not found');
-        }
+        $this->textService->checkExpirationText($text);
 
         return response()->json([
             'status' => 'ok',
@@ -54,14 +49,11 @@ class TextController extends Controller
         ]);
     }
 
-    public function update(UpdateRequest $request, $slug)
+    public function update(UpdateRequest $request, Text $text)
     {
         $data = $request->validated();
-
-        $text = $this->textService->update($data, $slug);
-        if ($text === null) {
-            throw new NotFoundHttpException('Text not found');
-        }
+        
+        $this->textService->updateText($data, $text);
 
         return response()->json([
             'status' => 'ok',
@@ -70,16 +62,13 @@ class TextController extends Controller
     }
 
     
-    public function destroy($slug)
+    public function destroy(Text $text)
     {
-        $text = $this->textService->delete($slug);
-        if ($text === null) {
-            throw new NotFoundHttpException('Text not found');
-        }
+        $this->textService->deleteText($text);
 
         return response()->json([
             'status' => 'ok',
             'data' => $text,
-        ]);
+        ], 204);
     }
 }
