@@ -20,8 +20,8 @@ Route::prefix('v1')->group(function () {
     Route::controller(TextController::class)->name('text.')->group(function () {
         Route::get('', 'index')->name('index');
         Route::post('', 'store')->name('store');
-        Route::get('{text}', 'show')->name('show');
-        Route::put('{text}', 'update')->name('update');
-        Route::delete('{text}', 'destroy')->name('destroy');
+        Route::get('{text}', 'show')->name('show')->can('view', 'text');
+        Route::put('{text}', 'update')->name('update')->can('update', 'text');
+        Route::delete('{text}', 'destroy')->name('destroy')->can('delete', 'text');
     });
 });
