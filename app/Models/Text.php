@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -23,6 +24,10 @@ class Text extends Model
     protected $casts = [
         'is_public' => 'boolean'
     ];
+
+    public function scopePublic(Builder $query) {
+        return $query->whereIsPublic(true);
+    }
 
     protected static function boot()
     {
