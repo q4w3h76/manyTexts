@@ -29,7 +29,6 @@ Route::prefix('v1')->group(function () {
         // register route
         Route::post('register', RegisterController::class)->name('register')->middleware('guest');
     });
-
     // email verification routes
     Route::controller(EmailVerificationController::class)
         ->prefix('email/verify')
