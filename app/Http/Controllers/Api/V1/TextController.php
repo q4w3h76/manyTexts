@@ -65,9 +65,6 @@ class TextController extends Controller
     {
         $this->textService->deleteText($text);
 
-        return response()->json([
-            'status' => 'ok',
-            'data' => $text,
-        ], 204);
+        return response()->json([], 204);
     }
 }
