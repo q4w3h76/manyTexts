@@ -16,7 +16,7 @@ class DeleteTextJob implements ShouldQueue
 
     private $textId;
 
-    public function __construct($textId)
+    public function __construct(int $textId)
     {
         $this->textId = $textId;
     }
