@@ -35,10 +35,7 @@ class TextService
             $data['tags'] = json_encode($data['tags']);
         }
 
-        $data['expiration'] = 
-            $data['expiration'] != 0 ? 
-                now()->addMinutes($data['expiration']) :
-                null;
+        $data['expiration'] = $this->getNowAddMinutes($data['expiration']);
         
         $text = Text::create($data);
         
@@ -55,10 +52,13 @@ class TextService
         if(isset($data['tags'])) {
             $data['tags'] = json_encode($data['tags']);
         }
+        
         if(isset($data['expiration'])) {
             $data['expiration'] = $this->getNowAddMinutes($data['expiration']);
+            if($data['expiration'] != null) {
+                DeleteTextJob::dispatch($text->id)->delay($text->expiration);
+            }
         }
-            
 
         $text->update($data);
     }
