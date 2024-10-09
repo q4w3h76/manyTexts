@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Auth\LoginController;
+use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\TextController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,13 +23,14 @@ Route::prefix('v1')->group(function () {
             Route::post('logout', 'logout')->name('logout')->middleware('auth:sanctum');
             Route::get('me', 'me')->name('me')->middleware('auth:sanctum');
         });
+        Route::post('register', RegisterController::class)->name('register')->middleware('guest');
     });
 
     Route::controller(TextController::class)->middleware('auth.optional')->name('text.')->group(function () {
         Route::get('', 'index')->name('index');
         Route::post('', 'store')->name('store');
         Route::get('{text}', 'show')->name('show')->can('view', 'text');
-        Route::put('{text}', 'update')->name('update')->can('update', 'text');
+        Route::patch('{text}', 'update')->name('update')->can('update', 'text');
         Route::delete('{text}', 'destroy')->name('destroy')->can('delete', 'text');
     });
 });
