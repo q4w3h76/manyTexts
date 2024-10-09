@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Jobs\DeleteTextJob;
 use App\Models\Text;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +27,7 @@ class TextService
     public function storeText($data): Text
     {
         if (Auth::check()) {
-            $data['user_id'] = Auth::id();
+            $data['user_id'] = Auth::user()->id;
         }
         // array to json
         if(isset($data['tags'])) {
@@ -51,13 +50,6 @@ class TextService
         // array to json
         if(isset($data['tags'])) {
             $data['tags'] = json_encode($data['tags']);
-        }
-
-        if(isset($data['expiration'])) {
-            $data['expiration'] = $this->getNowAddMinutes($data['expiration']);
-            if($data['expiration'] != null) {
-                DeleteTextJob::dispatch($text->id)->delay($text->expiration);
-            }
         }
 
         $text->update($data);

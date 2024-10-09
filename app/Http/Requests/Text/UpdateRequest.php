@@ -28,7 +28,6 @@ class UpdateRequest extends FormRequest
             'text' => ['string', 'min:1'],
             'tags' => ['array'],
             'is_public' => ['boolean'],
-            'expiration' => ['integer', 'min:0', 'max:527040'],
         ];
     }
 }
