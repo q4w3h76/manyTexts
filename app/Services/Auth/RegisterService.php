@@ -3,6 +3,7 @@
 namespace App\Services\Auth;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterService
@@ -12,7 +13,7 @@ class RegisterService
         $data['password'] = Hash::make($data['password']);
         
         $user = User::create($data);
-
+        event(new Registered($user));
         return $user->id;
     }
 }

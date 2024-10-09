@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Auth\EmailVerificationController;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\TextController;
@@ -24,6 +25,11 @@ Route::prefix('v1')->group(function () {
             Route::get('me', 'me')->name('me')->middleware('auth:sanctum');
         });
         Route::post('register', RegisterController::class)->name('register')->middleware('guest');
+    });
+
+    Route::controller(EmailVerificationController::class)->prefix('email/verify')->name('verification.')->middleware('auth:sanctum')->group(function () {
+        Route::post('notice', 'notice')->name('notice');
+        Route::get('{id}/{hash}', 'verify')->name('verify')->middleware('signed');
     });
 
     Route::controller(TextController::class)->middleware('auth.optional')->name('text.')->group(function () {
