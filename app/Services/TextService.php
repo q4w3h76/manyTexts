@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
+use App\Jobs\DeleteTextJob;
 use App\Models\Text;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +22,6 @@ class TextService
         if($text->expiration === null) {
             $text->delete();
         }
-        return $text;
     }
 
     public function storeText($data): Text
@@ -35,12 +34,14 @@ class TextService
             $data['tags'] = json_encode($data['tags']);
         }
 
-        $data['expiration'] = 
-            $data['expiration'] != 0 ? 
-                now()->addMinutes($data['expiration']) :
-                null;
+        $data['expiration'] = $this->getNowAddMinutes($data['expiration']);
         
         $text = Text::create($data);
+        
+        if($text->expiration != null) {
+            DeleteTextJob::dispatch($text->id)->delay($text->expiration);
+        }
+
         return $text;
     }
 
@@ -50,10 +51,6 @@ class TextService
         if(isset($data['tags'])) {
             $data['tags'] = json_encode($data['tags']);
         }
-        if(isset($data['expiration'])) {
-            $data['expiration'] = $this->getNowAddMinutes($data['expiration']);
-        }
-            
 
         $text->update($data);
     }
