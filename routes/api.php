@@ -31,16 +31,20 @@ Route::prefix('v1')->group(function () {
     });
 
     // email verification routes
-    Route::controller(EmailVerificationController::class)->prefix('email/verify')->name('verification.')->middleware('auth:sanctum')->group(function () {
-        Route::post('notice', 'notice')->name('notice');
-        Route::get('{id}/{hash}', 'verify')->name('verify')->middleware('signed');
-    });
+    Route::controller(EmailVerificationController::class)
+        ->prefix('email/verify')
+        ->name('verification.')
+        ->middleware(['auth:sanctum', 'notVerified'])
+        ->group(function () {
+            Route::post('notice', 'notice')->name('notice');
+            Route::get('{id}/{hash}', 'verify')->name('verify')->middleware('signed');
+        });
     // text resource routes
     Route::controller(TextController::class)->middleware('auth.optional')->name('text.')->group(function () {
         Route::get('', 'index')->name('index');
         Route::post('', 'store')->name('store');
         Route::get('{text}', 'show')->name('show')->can('view', 'text');
-        Route::patch('{text}', 'update')->name('update')->can('update', 'text');
-        Route::delete('{text}', 'destroy')->name('destroy')->can('delete', 'text');
+        Route::patch('{text}', 'update')->name('update')->can('update', 'text')->middleware('verified');
+        Route::delete('{text}', 'destroy')->name('destroy')->can('delete', 'text')->middleware('verified');
     });
 });
