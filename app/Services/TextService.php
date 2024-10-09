@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\DeleteTextJob;
 use App\Models\Text;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Collection;
@@ -22,7 +23,6 @@ class TextService
         if($text->expiration === null) {
             $text->delete();
         }
-        return $text;
     }
 
     public function storeText($data): Text
@@ -41,6 +41,11 @@ class TextService
                 null;
         
         $text = Text::create($data);
+        
+        if($text->expiration != null) {
+            DeleteTextJob::dispatch($text->id)->delay($text->expiration);
+        }
+
         return $text;
     }
 
