@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class TextService
 {
-    public function getAllTexts(): Collection
+    public function getAllTexts()
     {
         $texts = Text::public()->paginate(15);
-        return new Collection($texts);
+        return $texts;
     }
 
     public function checkExpirationText(Text $text)

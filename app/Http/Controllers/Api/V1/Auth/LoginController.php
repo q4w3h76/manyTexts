@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Resources\UserResource;
 use App\Services\Auth\LoginService;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class LoginController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
         $device_name = $request->input('device_name');
-        
+
         $token = $this->loginService->login($credentials, $device_name);
 
         return response()->json([
@@ -42,7 +43,7 @@ class LoginController extends Controller
     {
         return response()->json([
            'status' => 'ok',
-           'data' => $request->user(),
+           'data' => new UserResource($request->user()),
         ]);
     }
 }
