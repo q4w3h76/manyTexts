@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Text\FilterRequest;
 use App\Http\Requests\Text\StoreRequest;
 use App\Http\Requests\Text\UpdateRequest;
+use App\Http\Resources\TextCollection;
+use App\Http\Resources\TextResource;
 use App\Models\Text;
 use App\Services\TextService;
 
@@ -17,13 +20,12 @@ class TextController extends Controller
         $this->textService = $textService;
     }
     
-    public function index()
+    public function index(FilterRequest $request)
     {
-        $texts = $this->textService->getAllTexts();
-        return response()->json([
-            'status' => 'ok',
-            'data' => $texts,
-        ], 200);
+        $data = $request->validated();
+        $texts = $this->textService->getAllTexts($data);
+
+        return response()->json(new TextCollection($texts), 200);
     }
     
     public function store(StoreRequest $request)
@@ -33,7 +35,7 @@ class TextController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'slug' => $text->slug,
+            'slug' => new TextResource($text),
         ], 201);
     }
 
@@ -44,7 +46,7 @@ class TextController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'data' => $text,
+            'data' => new TextResource($text),
         ]);
     }
 
@@ -56,7 +58,7 @@ class TextController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'data' => $text,
+            'data' => new TextResource($text),
         ]);
     }
 
