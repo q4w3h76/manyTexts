@@ -42,7 +42,7 @@ Route::prefix('v1')->group(function () {
     Route::controller(TextController::class)->middleware('auth.optional')->name('text.')->group(function () {
         Route::get('', 'index')->name('index');
         Route::post('', 'store')->name('store');
-        Route::get('{text}', 'show')->name('show')->can('view', 'text');
+        Route::get('{slug}', 'show')->name('show');
         Route::patch('{text}', 'update')->name('update')->can('update', 'text')->middleware('verified');
         Route::delete('{text}', 'destroy')->name('destroy')->can('delete', 'text')->middleware('verified');
     });

@@ -10,6 +10,7 @@ use App\Http\Resources\TextCollection;
 use App\Http\Resources\TextResource;
 use App\Models\Text;
 use App\Services\TextService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TextController extends Controller
 {
@@ -40,9 +41,14 @@ class TextController extends Controller
     }
 
     
-    public function show(Text $text)
+    public function show(string $slug)
     {
-        $this->textService->checkExpirationText($text);
+        $text = $this->textService->getText($slug);
+
+        if($text === null)
+            throw new NotFoundHttpException('Text not found');
+
+        $this->authorize('view', $text);
 
         return response()->json([
             'status' => 'ok',
