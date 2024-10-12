@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Text\FilterRequest;
 use App\Http\Requests\Text\StoreRequest;
 use App\Http\Requests\Text\UpdateRequest;
 use App\Http\Resources\TextCollection;
@@ -19,9 +20,11 @@ class TextController extends Controller
         $this->textService = $textService;
     }
     
-    public function index()
+    public function index(FilterRequest $request)
     {
-        $texts = $this->textService->getAllTexts();
+        $data = $request->validated();
+        $texts = $this->textService->getAllTexts($data);
+
         return response()->json(new TextCollection($texts), 200);
     }
     

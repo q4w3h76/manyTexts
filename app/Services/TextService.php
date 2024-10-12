@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Filters\TextFilter;
 use App\Jobs\DeleteTextJob;
 use App\Models\Text;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,9 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class TextService
 {
-    public function getAllTexts()
+    public function getAllTexts($data)
     {
-        $texts = Text::public()->paginate(15);
+        $filter = app()->make(TextFilter::class, ['queryParams' => array_filter($data)]);
+        // get all public text with filter and pagination
+        $texts = Text::public()->filter($filter)->paginate(15);
+
         return $texts;
     }
 
