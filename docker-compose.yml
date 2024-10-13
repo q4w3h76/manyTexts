@@ -1,0 +1,46 @@
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - "./_docker/nginx/default.conf:/etc/nginx/conf.d/default.conf"
+      - "./:/var/www"
+    ports:
+      - 8100:80
+    restart: always
+    depends_on:
+      - app
+    container_name: ${APP_NAME}_nginx
+
+  app:
+    build:
+      context: .
+      dockerfile: _docker/app/Dockerfile
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - db
+      - redis
+    container_name: ${APP_NAME}_app
+
+  db:
+    image: mysql:8.0
+    restart: always
+    volumes:
+      - ./tmp/db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      # MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 8101:3306
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    container_name: ${APP_NAME}_db
+
+  redis:
+    image: redis:7.4
+    restart: always
+    volumes:
+      - ./tmp/redis:/var/lib/redis
+    ports:
+      - 8102:6379
+    container_name: ${APP_NAME}_redis
