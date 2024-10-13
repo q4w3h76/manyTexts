@@ -15,16 +15,16 @@ class TextPolicy
         if($text->is_public) {
             return true;
         }
-        return $user != null ? $text->user_id === $user->id : false;
+        return $user != null ? $text->user_id == $user->id : false;
     }
 
     public function update(User $user, Text $text)
     {
-        return $text->user_id === $user->id;
+        return $text->user_id == $user->id;
     }
 
     public function delete(User $user, Text $text)
     {
-        return $text->user_id === $user->id;
+        return $text->user_id == $user->id;
     }
 }

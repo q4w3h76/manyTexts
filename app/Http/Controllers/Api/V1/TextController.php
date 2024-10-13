@@ -36,7 +36,7 @@ class TextController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'slug' => new TextResource($text),
+            'data' => new TextResource($text),
         ], 201);
     }
 
