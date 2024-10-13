@@ -36,7 +36,7 @@ class TextTest extends TestCase
         $text = Text::first();
         $text = (new TextResource($text))->toArray(request());
         $slug = $text['slug'];
-        $response = $this->get('/api/v1/' . $slug);
+        $response = $this->get('/api/v1/posts/' . $slug);
         // checking the response
         $response->assertOk();
         $received_text = $response->json()['data'];
@@ -50,7 +50,7 @@ class TextTest extends TestCase
         $this->artisan('db:seed');
         $texts = Text::public()->paginate(15);
         $texts = json_encode(new TextCollection($texts));
-        $response = $this->get('/api/v1/');
+        $response = $this->get('/api/v1/posts');
         // checking the response
         $response->assertOk();
         $received_texts = json_encode($response->json());
@@ -67,7 +67,7 @@ class TextTest extends TestCase
             'is_public' => true,
             'expiration' => 0,
         ];
-        $response = $this->postJson('/api/v1/', $data);
+        $response = $this->postJson('/api/v1/posts', $data);
         // checking the response
         $response->assertCreated();
         $this->assertDatabaseCount('texts', 1);
@@ -102,7 +102,7 @@ class TextTest extends TestCase
             'is_public' => false,
         ];
         // request with token
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->patchJson('/api/v1/' . $slug, $data);
+        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->patchJson('/api/v1/posts/' . $slug, $data);
         // checking the response
         $response->assertOk();
         // get updated text
@@ -125,7 +125,7 @@ class TextTest extends TestCase
         $text = Text::first();
         $slug = $text->slug;
         // request with token
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->delete('/api/v1/' . $slug);
+        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->delete('/api/v1/posts/' . $slug);
         // checking the response
         $response->assertStatus(204);
         $this->assertDatabaseEmpty('texts');
