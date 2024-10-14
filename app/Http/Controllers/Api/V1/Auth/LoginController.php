@@ -25,7 +25,6 @@ class LoginController extends Controller
         $token = $this->loginService->login($credentials, $device_name);
 
         return response()->json([
-            'status' => 'ok',
             'token' => $token
         ]);
     }
@@ -34,16 +33,11 @@ class LoginController extends Controller
     {
         $this->loginService->logout();
 
-        return response()->json([
-           'status' => 'ok'
-        ]);
+        return response()->json([], 204);
     }
 
     public function me(Request $request)
     {
-        return response()->json([
-           'status' => 'ok',
-           'data' => new UserResource($request->user()),
-        ]);
+        return UserResource::make($request->user());
     }
 }

@@ -26,9 +26,7 @@ class RegisterController extends Controller
         
         $this->registerService->register($data);
         
-        return response()->json([
-            'status' => 'ok',
-        ]);
+        return response()->json([], 200);
     }
 }
 
