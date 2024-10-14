@@ -20,6 +20,7 @@ services:
     depends_on:
       - db
       - redis
+      - mail
     container_name: ${APP_NAME}_app
 
   db:
@@ -44,3 +45,13 @@ services:
     ports:
       - 8102:6379
     container_name: ${APP_NAME}_redis
+
+  mail:
+    image: mailhog/mailhog
+    restart: always
+    volumes:
+      - ./tmp/mailhog:/var/lib/mailhog
+    ports:
+      - 8103:8025
+      - 8104:1025
+    container_name: ${APP_NAME}_mail
