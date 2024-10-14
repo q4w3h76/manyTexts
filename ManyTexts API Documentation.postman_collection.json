@@ -1,0 +1,1096 @@
+{
+	"info": {
+		"_postman_id": "d1d69db2-748e-4b5a-a0e6-dbfdcd90b518",
+		"name": "ManyTexts API Documentation",
+		"description": "It's simple app for create texts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28998160"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{accept}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{content-type}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"boss6@email.com\",\r\n    \"password\" : \"123456\",\r\n    \"device_name\" : \"iphone\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{accept}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{content-type}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"boss6@email.com\",\r\n    \"password\": \"123456\",\r\n    \"device_name\": \"iphone\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"4|9wQUpIGaml3o3N9drjGsZJYD8PTIQNhGfOfd8ryFc90c5333\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{accept}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{content-type}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "8zN7nrYrV/the-boss-baby-4k-wallpaper-preview.jpg"
+								},
+								{
+									"key": "name",
+									"value": "boss",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "boss8@email.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "about",
+									"value": "i am boss",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{accept}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{content-type}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "5|FWSTWAsb4CMYKYGe7zrV4SH0e5sUKgP9O6yioF701a5ac6de",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{accept}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{content-type}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{accept}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{content-type}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"antonette90@example.org\",\r\n    \"password\" : \"password\",\r\n    \"device_name\" : \"iphone\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8100/api/v1/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8100",
+									"path": [
+										"api",
+										"v1",
+										"logout"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|yTMJ0M37nZCBPAHbYhIp0qlSdSor6XJ1abvMHe4Ka787956",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{accept}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{content-type}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{accept}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{content-type}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"antonette90@example.org\",\r\n    \"password\" : \"password\",\r\n    \"device_name\" : \"iphone\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8100/api/v1/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8100",
+									"path": [
+										"api",
+										"v1",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 4,\n        \"name\": \"boss\",\n        \"email\": \"boss6@email.com\",\n        \"about\": \"i am boss\",\n        \"avatar_url\": \"images/avatars/ig5HOBsgwh8NXGzkAk2QXBtr6j8VhGmUA65i0FyW.jpg\",\n        \"created_at\": \"2024-10-14 11:57:41\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Login and Register"
+		},
+		{
+			"name": "Text",
+			"item": [
+				{
+					"name": "Create a text",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{accept}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{content-type}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"{{lorem_text}}\",\r\n    \"title\": \"Lorem title\",\r\n    \"tags\": [\"new\", \"popular\"],\r\n    \"is_public\": true,\r\n    \"expiration\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/texts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"texts"
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/texts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"texts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"slug\": \"9RtbITe9rD\",\n        \"title\": \"Lorem title\",\n        \"text\": \"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint quidem eum animi id tempore alias, aut fuga ducimus. Doloremque porro quidem soluta iure sequi vitae in sint, tempore vel dignissimos!\",\n        \"tags\": \"[\\\"new\\\",\\\"popular\\\"]\",\n        \"user_id\": 4,\n        \"is_public\": true,\n        \"created_at\": \"2024-10-14 12:19:17\",\n        \"updated_at\": \"2024-10-14 12:19:17\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a text",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{accept}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{content-type}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"text\": \"{{lorem_text}}\",\r\n    \"title\": \"Lorem title1\",\r\n    \"tags\": [\"old\", \"text\"],\r\n    \"is_public\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/texts/IfxuL3yDKL",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"texts",
+								"IfxuL3yDKL"
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/texts/IfxuL3yDKL",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"texts",
+										"IfxuL3yDKL"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"slug\": \"9RtbITe9rD\",\n        \"title\": \"Lorem title\",\n        \"text\": \"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint quidem eum animi id tempore alias, aut fuga ducimus. Doloremque porro quidem soluta iure sequi vitae in sint, tempore vel dignissimos!\",\n        \"tags\": \"[\\\"new\\\",\\\"popular\\\"]\",\n        \"user_id\": 4,\n        \"is_public\": true,\n        \"created_at\": \"2024-10-14 12:19:17\",\n        \"updated_at\": \"2024-10-14 12:19:17\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a text",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|xq4EMB270S3zNj72N7My0zMIOrO1ANZK82JBiR9gee358a29",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{accept}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{content-type}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/texts/q0bW4jwWAr",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"texts",
+								"q0bW4jwWAr"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{accept}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{content-type}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/texts/FC23ON5Nj0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"texts",
+										"FC23ON5Nj0"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"slug\": \"9RtbITe9rD\",\n        \"title\": \"Lorem title\",\n        \"text\": \"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint quidem eum animi id tempore alias, aut fuga ducimus. Doloremque porro quidem soluta iure sequi vitae in sint, tempore vel dignissimos!\",\n        \"tags\": \"[\\\"new\\\",\\\"popular\\\"]\",\n        \"user_id\": 4,\n        \"is_public\": true,\n        \"created_at\": \"2024-10-14 12:19:17\",\n        \"updated_at\": \"2024-10-14 12:19:17\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get texts",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{accept}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{content-type}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/texts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"texts"
+							],
+							"query": [
+								{
+									"key": "tags[]",
+									"value": "quia",
+									"disabled": true
+								},
+								{
+									"key": "tags[]",
+									"value": "impedit",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "dolo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{accept}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{content-type}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8100/api/v1/texts/?tags[]=quia&tags[]=impedit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8100",
+									"path": [
+										"api",
+										"v1",
+										"texts",
+										""
+									],
+									"query": [
+										{
+											"key": "tags[]",
+											"value": "quia"
+										},
+										{
+											"key": "tags[]",
+											"value": "impedit"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"per_page\": 15,\n        \"total\": 2\n    },\n    \"data\": [\n        {\n            \"slug\": \"e46o1rvuvG\",\n            \"title\": \"dolorem sit delectus\",\n            \"text\": \"Omnis et inventore incidunt aut aut et. Dolore ipsum rerum laboriosam vitae. Delectus et ut itaque accusamus expedita culpa porro molestiae.\",\n            \"tags\": \"[\\\"impedit\\\"]\",\n            \"user_id\": 1,\n            \"is_public\": true,\n            \"created_at\": \"2024-10-09 09:11:53\",\n            \"updated_at\": \"2024-10-09 09:11:53\"\n        },\n        {\n            \"slug\": \"gOF2rpYAh1\",\n            \"title\": \"cupiditate repellendus expedita\",\n            \"text\": \"Non occaecati debitis corrupti cumque aliquam officia impedit. Facilis voluptas debitis nobis ipsa quo nulla quod. Deserunt provident voluptatem sequi provident. Voluptas mollitia ut quisquam dolor.\",\n            \"tags\": \"[\\\"quia\\\"]\",\n            \"user_id\": 2,\n            \"is_public\": true,\n            \"created_at\": \"2024-10-09 09:11:53\",\n            \"updated_at\": \"2024-10-09 09:11:53\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a text",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{accept}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{content-type}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/texts/9RtbITe9rD",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"texts",
+								"9RtbITe9rD"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{accept}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{content-type}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/texts/OUwPZskscY",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"texts",
+										"OUwPZskscY"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "The `/texts` endpoints let you manage your texts."
+		},
+		{
+			"name": "Email verification",
+			"item": [
+				{
+					"name": "Verify email",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|xq4EMB270S3zNj72N7My0zMIOrO1ANZK82JBiR9gee358a29",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{accept}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{content-type}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/email/verify/4/da82a1cc9ced6754ac81ff0bfad7a3ed797e36aa?expires=1728486604&signature=862cf347d13bff3d9d3a47bf8b739ff3002a31a2182ea24615f5521c2eaee828",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"email",
+								"verify",
+								"4",
+								"da82a1cc9ced6754ac81ff0bfad7a3ed797e36aa"
+							],
+							"query": [
+								{
+									"key": "expires",
+									"value": "1728486604"
+								},
+								{
+									"key": "signature",
+									"value": "862cf347d13bff3d9d3a47bf8b739ff3002a31a2182ea24615f5521c2eaee828"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{accept}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{content-type}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/email/verify/4/da82a1cc9ced6754ac81ff0bfad7a3ed797e36aa?expires=1728486604&signature=862cf347d13bff3d9d3a47bf8b739ff3002a31a2182ea24615f5521c2eaee828",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"email",
+										"verify",
+										"4",
+										"da82a1cc9ced6754ac81ff0bfad7a3ed797e36aa"
+									],
+									"query": [
+										{
+											"key": "expires",
+											"value": "1728486604"
+										},
+										{
+											"key": "signature",
+											"value": "862cf347d13bff3d9d3a47bf8b739ff3002a31a2182ea24615f5521c2eaee828"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Email notice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "5|cpUybQU2Opyak0JP7qgEUdg18xwL2JMGvBLbbLIw228f28f1",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{accept}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{content-type}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/email/verify/notice",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"email",
+								"verify",
+								"notice"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/email/verify",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"email",
+										"verify"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"description": "routes for verif email"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8100/api/v1"
+		},
+		{
+			"key": "accept",
+			"value": "application/json",
+			"type": "string"
+		},
+		{
+			"key": "content-type",
+			"value": "application/json",
+			"type": "string"
+		},
+		{
+			"key": "lorem_text",
+			"value": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint quidem eum animi id tempore alias, aut fuga ducimus. Doloremque porro quidem soluta iure sequi vitae in sint, tempore vel dignissimos!",
+			"type": "string"
+		}
+	]
+}
