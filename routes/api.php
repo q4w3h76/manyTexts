@@ -39,7 +39,7 @@ Route::prefix('v1')->group(function () {
             Route::get('{id}/{hash}', 'verify')->name('verify')->middleware('signed');
         });
     // text resource routes
-    Route::controller(TextController::class)->middleware('auth.optional')->name('text.')->group(function () {
+    Route::controller(TextController::class)->middleware('auth.optional')->prefix('posts')->name('text.')->group(function () {
         Route::get('', 'index')->name('index');
         Route::post('', 'store')->name('store');
         Route::get('{slug}', 'show')->name('show');

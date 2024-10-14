@@ -11,16 +11,12 @@ class EmailVerificationController extends Controller
     public function notice(Request $request) {
         $request->user()->sendEmailVerificationNotification();
 
-        return response()->json([
-            'status' => 'ok',
-        ]);
+        return response()->json([], 200);
     }
     
     public function verify(EmailVerificationRequest $request) {
         $request->fulfill();
 
-        return response()->json([
-            'status' => 'ok',
-        ]);
+        return response()->json([], 200);
     }
 }

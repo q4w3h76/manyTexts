@@ -26,7 +26,7 @@ class TextController extends Controller
         $data = $request->validated();
         $texts = $this->textService->getAllTexts($data);
 
-        return response()->json(new TextCollection($texts), 200);
+        return TextCollection::make($texts)->resolve();
     }
     
     public function store(StoreRequest $request)
@@ -34,10 +34,7 @@ class TextController extends Controller
         $data = $request->validated();
         $text = $this->textService->storeText($data);
 
-        return response()->json([
-            'status' => 'ok',
-            'data' => new TextResource($text),
-        ], 201);
+        return TextResource::make($text);
     }
 
     
@@ -50,10 +47,7 @@ class TextController extends Controller
 
         $this->authorize('view', $text);
 
-        return response()->json([
-            'status' => 'ok',
-            'data' => new TextResource($text),
-        ]);
+        return TextResource::make($text);
     }
 
     public function update(UpdateRequest $request, Text $text)
@@ -62,10 +56,7 @@ class TextController extends Controller
         
         $this->textService->updateText($data, $text);
 
-        return response()->json([
-            'status' => 'ok',
-            'data' => new TextResource($text),
-        ]);
+        return TextResource::make($text);
     }
 
     
