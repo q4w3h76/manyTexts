@@ -16,7 +16,7 @@ class TextTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const BASE_URL = '/api/v1/posts/';
+    private const BASE_URL = '/api/v1/texts/';
 
     public function setUp(): void
     {

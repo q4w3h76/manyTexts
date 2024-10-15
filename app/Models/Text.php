@@ -30,8 +30,9 @@ class Text extends Model
     public function tags(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => json_decode($value),
-            set: fn ($value) => json_encode($value),
+            // string ""[\"delectus\",\"ea\"]"" => ""["delectus","ea"]"" => "["delectus","ea"]" => ["delectus","ea"] array
+            get: fn ($value): array => json_decode(ltrim(rtrim(stripslashes($value), '"'),'"')),
+            set: fn (array $value) => json_encode($value),
         );
     }
 
