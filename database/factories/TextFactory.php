@@ -20,10 +20,9 @@ class TextFactory extends Factory
         for ($i=0; $i < rand(1, 5); $i++) { 
             array_push($tags, fake()->word());
         }
-        $tags = json_encode($tags);
         return [
             'title' => fake()->words(3, true),
-            'text' => fake()->text(),
+            'text' => fake()->realText(5000),
             'tags' => $tags,
             'is_public' => fake()->boolean(),
             'expiration' => now(),

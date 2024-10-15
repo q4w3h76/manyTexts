@@ -4,9 +4,12 @@ namespace App\Models;
 
 use App\Notifications\SendVerifyWithQueueNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Http;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -44,6 +47,16 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function avatarUrl(): Attribute
+    {
+        $baseUrlS3 = Config::get('filesystems.disks.s3.endpoint') . '/' . Config::get('filesystems.disks.s3.bucket') . '/';
+        
+        return Attribute::make(
+            get: fn ($value) =>  filter_var($value, FILTER_VALIDATE_URL) ? $value : $baseUrlS3 . $value,
+            set: fn ($value) => $value,
+        );
+    }
 
     public function sendEmailVerificationNotification()
     {
