@@ -46,10 +46,6 @@ class TextService
         if (Auth::check()) {
             $data['user_id'] = Auth::user()->id;
         }
-        // array to json
-        if(isset($data['tags'])) {
-            $data['tags'] = json_encode($data['tags']);
-        }
 
         $data['expiration'] = $this->getNowAddMinutes($data['expiration']);
         
@@ -64,11 +60,6 @@ class TextService
 
     public function updateText($data, Text $text)
     {
-        // array to json
-        if(isset($data['tags'])) {
-            $data['tags'] = json_encode($data['tags']);
-        }
-
         $text->update($data);
 
         if(Cache::get(self::TEXTS_PREFIX . $text->slug) != null) {
