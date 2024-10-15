@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\Auth\EmailVerificationController;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\TextController;
+use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,10 @@ Route::prefix('v1')->group(function () {
             Route::post('notice', 'notice')->name('notice');
             Route::get('{id}/{hash}', 'verify')->name('verify')->middleware('signed');
         });
+    // user resource routes
+    Route::controller(UserController::class)->prefix('users')->name('user.')->group(function () {
+        Route::get('{user}', 'show')->name('show');
+    });
     // text resource routes
     Route::controller(TextController::class)->middleware('auth.optional')->prefix('texts')->name('text.')->group(function () {
         Route::get('', 'index')->name('index');

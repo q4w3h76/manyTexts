@@ -26,6 +26,7 @@ class FilterRequest extends FormRequest
         return [
             'title' => 'string|min:3',
             'tags' => 'array',
+            'user_id' => 'integer|exists:users,id',
         ];
     }
 }

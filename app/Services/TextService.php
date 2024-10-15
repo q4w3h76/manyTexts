@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Filters\TextFilter;
 use App\Jobs\DeleteTextJob;
 use App\Models\Text;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;

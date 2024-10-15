@@ -9,6 +9,7 @@ use App\Http\Requests\Text\UpdateRequest;
 use App\Http\Resources\TextCollection;
 use App\Http\Resources\TextResource;
 use App\Models\Text;
+use App\Models\User;
 use App\Services\TextService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -36,7 +37,6 @@ class TextController extends Controller
 
         return TextResource::make($text);
     }
-
     
     public function show(string $slug)
     {
