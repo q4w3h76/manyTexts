@@ -15,4 +15,5 @@ git clone https://github.com/q4w3h76/manyTexts manyTextApp
 cd manyTextApp
 cat .env.example >> .env
 docker-compose up -d
+docker exec -it Laravel_app make init
 ```
