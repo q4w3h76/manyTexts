@@ -11,8 +11,8 @@ Postman was used for documentation
 
 Docker is used for deployment
 ```
-git clone https://github.com/q4w3h76/manyTexts manyTextApp
-cd manyTextApp
+git clone https://github.com/q4w3h76/manyTexts
+cd manyText
 cat .env.example >> .env
 docker-compose up -d
 docker exec -it Laravel_app make init
